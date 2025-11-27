@@ -19,9 +19,9 @@ permissions:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SVC_ACCOUNT: ${{ secrets.GCP_SVC_ACCOUNT }}
-  GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/${{ secrets.GCP_SVC_ACCOUNT }}.json
-  SVC_ACCOUNT_EMAIL: ${{ secrets.GCP_SVC_ACCOUNT }}@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+  SVC_ACCOUNT: ${{ secrets.GCP_GH_SVC_ACCOUNT }}
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/${{ secrets.GCP_GH_SVC_ACCOUNT }}.json
+  SVC_ACCOUNT_EMAIL: ${{ secrets.GCP_GH_SVC_ACCOUNT }}@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
   REGION: ${{ vars.GCP_REGION }} 
   FUNCTIONS_PORT: ${{ vars.GCP_DEV_FUNCTIONS_PORT}}
   FLASK_RUN_PORT: ${{ vars.FLASK_RUN_PORT }}
@@ -57,7 +57,7 @@ jobs:
     # Creates a credentials file that will be used for ADC later
     - name: Create credentials file
       run: |
-        echo "${{ secrets.GCP_SVC_ACCOUNT_CREDS }}" | base64 --decode > $GOOGLE_APPLICATION_CREDENTIALS
+        echo "${{ secrets.GCP_GH_SVC_ACCOUNT_CREDS }}" | base64 --decode > $GOOGLE_APPLICATION_CREDENTIALS
         echo "Checking the credentials:"
         head -n 3 $GOOGLE_APPLICATION_CREDENTIALS
       shell: bash
